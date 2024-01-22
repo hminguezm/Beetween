@@ -54,7 +54,6 @@ Desarrollar unos tests al endpoint REST para validar las siguientes peticiones a
 4. **Test 4:** Petición a las 10:00 del día 15 para el producto 35455 de la marca 1 (ZARA).
 5. **Test 5:** Petición a las 21:00 del día 16 para el producto 35455 de la marca 1 (ZARA).
 
-
 ## La solución sigue una arquitectura hexagonal para asegurar una separación clara de las capas y facilitar el mantenimiento y la escalabilidad.
 
 ### Requisitos
@@ -63,15 +62,7 @@ Desarrollar unos tests al endpoint REST para validar las siguientes peticiones a
 - Maven
 - Docker
 
-# API Metrics
-### A expressJS server application (NodeJS - Typescript) up [Docker](https://docker.com/) with Hexagonal Architecture.
-
-# Requirement
--  [dotenv-cli](https://www.npmjs.com/package/dotenv-cli) (by local stage)
--  [Docker](https://www.docker.com/) ~>18 (Optional)
--  [Docker compose](https://docs.docker.com/compose/) ~>1.28.0 (Optional)
-
-# Running in local stages
+# Ejecutar localmente
 
 ```shell
 mvn compile
@@ -80,37 +71,47 @@ mvn package -DskipTests (Optional)
 mvn package -Dmaven.test.skip=true  (Optional)
 ```
 
-# Running test in local stages
+# Ejecutar las pruebas localmente
     
 ```shell
 mvn test
   ```
-
-# Running with Docker
-
-
-### show swagger
-```note
-/api/v1/docs
-```
-
-## Run with environment file
-
-```shell
-docker-compose -f docker-compose.yml up -d --build
-```
-
-## Running a new container every time and then log output (default environment):
+`
+## Ejecutar un nuevo contenedor cada vez y luego registrar la salida (entorno por defecto):
 
 ```shell
 docker-compose up -d --build --force-recreate; docker-compose logs -f
 ```
 
-## Running a new container every time and then log output (with environment):
+## Ejecutar un nuevo contenedor cada vez que se haga algun cambio y luego la salida de registro (con variables de ambiente):
 
 ```shell
 docker-compose -f docker-compose.yml up -d --build --force-recreate; docker-compose -f docker-compose.yml logs -f
 ```
+
+
+## URL para testear
+
+### Localmente
+
+```url
+
+http://localhost:3000/prices?brandId=1&=35455&date=2020-06-14T10:00:00
+
+```
+
+### Mediante docker
+
+```url
+
+http://localhost:8080/prices?brandId=1&productId=35455&date=2020-06-14T10:00:00
+
+```
+
+Nota: Se puede cambiar los valores de los parámetros de la URL para probar los diferentes casos de prueba.
+- **brandId:** 1, 2, 3, 4.
+- **productId:** 35455, 35456, 35457, 35458.
+- **date:** 2020-06-14T10:00:00, 2020-06-14T16:00:00, 2020-06-14T21:00:00, 2020-06-15T10:00:00, 2020-06-16T21:00:00.
 
 ## Reference Links
 
